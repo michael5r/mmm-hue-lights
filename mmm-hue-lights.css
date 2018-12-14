@@ -1,0 +1,327 @@
+.mmm-hue-lights .hue-wrapper.left {
+    justify-content: flex-start;
+}
+
+.mmm-hue-lights .hue-wrapper.left .hue-list {
+    text-align: left;
+}
+
+.mmm-hue-lights .hue-wrapper.center {
+    justify-content: center;
+}
+
+.mmm-hue-lights .hue-wrapper.center .hue-list {
+    text-align: center;
+}
+
+.mmm-hue-lights .hue-wrapper.right {
+    justify-content: flex-end;
+}
+
+.mmm-hue-lights .hue-wrapper.right .hue-list {
+    text-align: right;
+}
+
+
+/*
+    LIST VIEW
+*/
+
+.mmm-hue-lights .hue-list .off {
+    opacity: 0.5;
+}
+
+.mmm-hue-lights .hue-list th {
+    color: #fff;
+}
+
+.mmm-hue-lights .bw .hue-list .off td {
+    color: #aaa;
+}
+
+.mmm-hue-lights .bw .hue-list .on td {
+    color: #fff;
+}
+
+.mmm-hue-lights .hue-list th.icon,
+.mmm-hue-lights .hue-list td.icon {
+    width: 25px;
+}
+
+.mmm-hue-lights .hue-list .icn-bulb {
+    background-image: url('icons/hue-bulb-light.svg');
+    background-size: 100% 100%;
+    width: 12px;
+    height: 16px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.mmm-hue-lights .hue-list .off .icn-bulb {
+    opacity: 0.5;
+}
+
+.mmm-hue-lights .groups .hue-list .icn-bulb {
+    background-image: url('icons/hue-groups-light.svg');
+    width: 17px;
+    height: 16px;
+}
+
+.mmm-hue-lights .groups .hue-list th.icon,
+.mmm-hue-lights .groups .hue-list td.icon {
+    width: 30px;
+}
+
+
+/*
+    GRID VIEW - REGULAR
+*/
+
+.mmm-hue-lights .grid {
+    max-width: 300px;
+    width: 100%;
+}
+
+.mmm-hue-lights .grid .hue {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 15px;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.mmm-hue-lights .grid .hue.on {
+    background-color: #fefbea;
+}
+
+.mmm-hue-lights .grid .hue.on .icn,
+.mmm-hue-lights .grid .hue.on .title {
+    color: #101010;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.mmm-hue-lights .grid .hue.on .title small {
+    color: #87857c;
+}
+
+.mmm-hue-lights .grid .hue.on.colored-dark .icn-bulb {
+    background-image: url('icons/hue-bulb-dark.svg');
+}
+
+.mmm-hue-lights .grid.groups .hue.on.colored-dark .icn-bulb {
+    background-image: url('icons/hue-groups-dark.svg');
+}
+
+.mmm-hue-lights .grid .hue.on.colored-dark .icn,
+.mmm-hue-lights .grid .hue.on.colored-dark .title {
+    color: #101010;
+}
+
+.mmm-hue-lights .grid .hue.on.colored-dark .title small {
+    color: rgba(0,0,0,0.7);
+}
+
+.mmm-hue-lights .grid .hue.on.colored-light .icn-bulb {
+    background-image: url('icons/hue-bulb-light.svg');
+}
+
+.mmm-hue-lights .grid.groups .hue.on.colored-light .icn-bulb {
+    background-image: url('icons/hue-groups-light.svg');
+}
+
+.mmm-hue-lights .grid .hue.on.colored-light .icn,
+.mmm-hue-lights .grid .hue.on.colored-light .title {
+    color: #fff;
+}
+
+.mmm-hue-lights .grid .hue.on.colored-light .title small {
+    color: rgba(255,255,255,0.7);
+}
+
+.mmm-hue-lights .grid .hue.off {
+    background-color: #343434;
+}
+
+.mmm-hue-lights .grid .hue.off .icn-bulb {
+    background-image: url('icons/hue-bulb-light.svg');
+}
+
+.mmm-hue-lights .grid.groups .hue.off .icn-bulb {
+    background-image: url('icons/hue-groups-light.svg');
+}
+
+.mmm-hue-lights .grid .hue.off .icn,
+.mmm-hue-lights .grid .hue.off .title {
+    color: #fff;
+}
+
+.mmm-hue-lights .grid .hue.off .title small {
+    color: #999;
+}
+
+.mmm-hue-lights .grid .hue .top {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.mmm-hue-lights .grid .hue .top .toggle {
+    width: 50px;
+    height: 25px;
+    border-radius: 13px;
+    padding: 1px;
+}
+
+.mmm-hue-lights .grid .hue.on .top .toggle {
+    background: rgba(0,0,0,0.2);
+    text-align: right;
+}
+
+.mmm-hue-lights .grid .hue.off .top .toggle {
+    background: rgba(255,255,255,0.2);
+    text-align: left;
+}
+
+.mmm-hue-lights .grid .hue .top .toggle:after {
+    content: '';
+    background-color: #fff;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);
+}
+
+.mmm-hue-lights .grid .hue .bot {
+    background: rgba(0,0,0,0.1);
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: right;
+    position: relative;
+}
+
+.mmm-hue-lights .grid .hue.off .bot {
+    display: none;
+}
+
+.mmm-hue-lights .grid .hue .bot .toggle {
+    background: linear-gradient(to right, rgba(0,0,0,0.1) 0%, #fff 100%);
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+    display: block;
+}
+
+.mmm-hue-lights .grid .hue .bot .toggle:after {
+    content: '';
+    background-color: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px 2px rgba(0,0,0,0.2);
+    display: inline-block;
+}
+
+.mmm-hue-lights .grid .hue .title {
+    text-align: left;
+    padding: 15px 0;
+    width: 75%;
+    font-family: 'Roboto', 'Roboto Condensed', 'Helvetica Neue', sans-serif;
+    line-height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 5px;
+    box-sizing: border-box;
+}
+
+.mmm-hue-lights .grid .hue .title small {
+    display: block;
+    opacity: 0.8;
+}
+
+.mmm-hue-lights .grid .hue .icn {
+    background-size: 100% 100%;
+    width: 15px;
+    height: 20px;
+    margin: 4px 10px 5px 0;
+}
+
+.mmm-hue-lights .grid.groups .hue .icn {
+    width: 27px;
+    height: 26px;
+    margin-right: 12px;
+}
+
+.mmm-hue-lights .grid .hue .icn-bulb {
+    background-image: url('icons/hue-bulb-dark.svg');
+}
+
+.mmm-hue-lights .grid.groups .hue .icn-bulb {
+    background-image: url('icons/hue-groups-dark.svg');
+}
+
+.mmm-hue-lights .grid .hue .toggle {
+    width: 100%;
+}
+
+
+/*
+    GRID VIEW - MINIMAL
+*/
+
+.mmm-hue-lights .grid.minimal .hue {
+    border-radius: 4px;
+    margin-bottom: 2px;
+}
+
+.mmm-hue-lights .grid.minimal .hue .title {
+    width: 90%;
+    padding: 10px 0;
+}
+
+.mmm-hue-lights .grid.minimal .hue.off .icn-bulb,
+.mmm-hue-lights .grid.minimal .hue.off .title {
+    opacity: 0.7;
+}
+
+.mmm-hue-lights .grid.minimal .hue .icn {
+    width: 15px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.mmm-hue-lights .grid.groups.minimal .hue .icn {
+    width: 21px;
+    height: 20px;
+}
+
+/*
+    GRID VIEW - ULTRA MINIMAL
+*/
+
+.mmm-hue-lights .grid.minimal-ultra {
+    display: flex;
+    flex-flow: row wrap;
+    margin: -4px;
+}
+
+.mmm-hue-lights .grid.minimal-ultra .hue {
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    margin: 4px;
+}
+
+.mmm-hue-lights .grid.minimal-ultra .hue .top {
+    display: none;
+}
+
+

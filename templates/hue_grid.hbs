@@ -1,0 +1,24 @@
+{{#each rows}}
+    <div class="hue {{ class }}"{{#if colorStyle }} style="{{{ colorStyle }}}"{{/if}}>
+
+        {{#unless isMinimalUltra }}
+        <div class="top">
+            <i class="icn icn-bulb"></i>
+            <div class="title">
+                {{ name}}
+                {{#if lightText }}<small>{{ lightText }}</small>{{/if}}
+            </div>
+            {{#unless isMinimal }}<div class="toggle"></div>{{/unless}}
+        </div>
+        {{/unless}}
+
+        {{#unless isMinimal }}
+            {{#if isOn }}
+                <div class="bot">
+                    <span class="toggle" style="width: {{{ itemBrightnessStyle }}};"></span>
+                </div>
+            {{/if}}
+        {{/unless}}
+
+    </div>
+{{/each}}

@@ -5,6 +5,7 @@ The `mmm-hue-lights` module is a [MagicMirror](https://github.com/MichMich/Magic
 This module displays the status of your [Philips Hue](http://meethue.com) lights and light groups on your Magic Mirror and and supports multiple view types and modes.
 
 ![image](https://user-images.githubusercontent.com/3209660/49979103-2e3cd400-ff13-11e8-8f76-bc4c7d5e7b76.png)
+
 *An example showing light groups on the left and lights on the right in the Grid view.*
 
 ## Installing the module

@@ -1,0 +1,44 @@
+<table class="hue-list xsmall table">
+
+    {{#unless isMinimal }}
+        <tr>
+            {{#if isRightAligned }}
+                <th>{{ c4Title }}</th>
+                <th>{{ c3Title }}</th>
+                <th>{{ c2Title }}</th>
+                <th class="icon"></th>
+            {{else}}
+                <th class="icon"></th>
+                <th>{{ c2Title }}</th>
+                <th>{{ c3Title }}</th>
+                <th>{{ c4Title }}</th>
+            {{/if}}
+        </tr>
+    {{/unless}}
+
+    {{#each rows}}
+        <tr{{#if rowClass }} class="{{ rowClass }}"{{/if}}{{#if rowStyles }} style="{{{ rowStyles }}}"{{/if}}>
+
+            {{#if ../isRightAligned }}
+                {{#unless ../isMinimal }}
+                    <td{{#if c4Class }} class="{{ c4Class }}"{{/if}}>{{{ c4Text }}}</td>
+                    <td{{#if c3Class }} class="{{ c3Class }}"{{/if}}>{{{ c3Text }}}</td>
+                {{/unless}}
+                <td>{{{ name }}}</td>
+                <td class="icon"><i class="icn-bulb"></i></td>
+
+            {{else}}
+
+                <td class="icon"><i class="icn-bulb"></i></td>
+                <td>{{{ name }}}</td>
+                {{#unless ../isMinimal }}
+                    <td{{#if c3Class }} class="{{ c3Class }}"{{/if}}>{{{ c3Text }}}</td>
+                    <td{{#if c4Class }} class="{{ c4Class }}"{{/if}}>{{{ c4Text }}}</td>
+                {{/unless}}
+
+            {{/if}}
+
+        </tr>
+    {{/each}}
+
+</table>

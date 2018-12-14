@@ -4,8 +4,8 @@ The `mmm-hue-lights` module is a [MagicMirror](https://github.com/MichMich/Magic
 
 This module displays the status of your [Philips Hue](http://meethue.com) lights and light groups on your Magic Mirror and and supports multiple view types and modes.
 
-TODO: add example
-*An example showing ...*
+![image](https://user-images.githubusercontent.com/3209660/49979103-2e3cd400-ff13-11e8-8f76-bc4c7d5e7b76.png)
+*An example showing light groups on the left and lights on the right in the Grid view.*
 
 ## Installing the module
 Run `git clone https://github.com/michael5r/mmm-hue-lights.git` from inside your `MagicMirror/modules` folder.
@@ -85,31 +85,42 @@ Option             | Type       | Default   | Description
 
 #### Default
 
-TODO: add screenshot
+![image](https://user-images.githubusercontent.com/3209660/49979206-a3100e00-ff13-11e8-94f2-d0e1a7c1d87f.png)
 
 #### Minimal
 
 With `minimalGrid` set to `true`.
 
-TODO: add screenshot
+![image](https://user-images.githubusercontent.com/3209660/49979288-05690e80-ff14-11e8-9e7e-4032e978f444.png)
 
 #### Ultra Minimal
 
 With `minimalGridUltra` set to `true`.
+Please note that this will only work if your `displayMode` is set to `lights`.
 
-TODO: add screenshot
+![image](https://user-images.githubusercontent.com/3209660/49979359-4c570400-ff14-11e8-8c16-503c91e85d2c.png)
 
 ### List View
 
-#### Default
+#### Default (Colored)
 
-TODO: add screenshot
+With `coloredList` set to `true`.
+
+![image](https://user-images.githubusercontent.com/3209660/49979457-b66fa900-ff14-11e8-8241-1467036301f2.png)
+
+#### Default (B&W)
+
+With `coloredList` set to `false`.
+
+![image](https://user-images.githubusercontent.com/3209660/49979485-da32ef00-ff14-11e8-8e54-5c3cd13ddbae.png)
 
 #### Minimal
 
-With `minimalList` set to `true`.
+With `minimalList` set to `true` and `alignment` set to `right`.
 
-TODO: add screenshot
+![image](https://user-images.githubusercontent.com/3209660/49979630-7fe65e00-ff15-11e8-94e1-b39250b10ecb.png)
+
+![image](https://user-images.githubusercontent.com/3209660/49979620-752bc900-ff15-11e8-8b3a-f280ecc16948.png)
 
 
 ## FAQ
@@ -132,7 +143,7 @@ This will now display all lights or groups named either `living room` or `office
 
 ### The colors don't exactly match what's shown in the Hue App
 
-The colors that are shown in this module are an approximation of the colors you'd see in the Hue app. There are some rather funky algorithms going on behind the scenes in the Hue app which I, unfortunately, don't have access to, so these colors values should be considered best guesses based on the available data.
+The colors that are shown in this module are an approximation of the colors you'd see in the Hue app. There are some rather funky algorithms going on behind the scenes in the Hue app which I, unfortunately, don't have access to, so these colors values should be considered best calculations based on the available data.
 
 
 ## Using Handlebars

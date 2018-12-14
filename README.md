@@ -143,6 +143,35 @@ displayFilter: ['living room', 'office']
 
 This will now display all lights or groups named either `living room` or `office`. The filter is not case-sensitive, so `OFFICE` would work as well.
 
+### In the grid view is there any way to show the lights or light groups horizontally across the screen?
+
+Something like this?
+
+![image](https://user-images.githubusercontent.com/3209660/49984456-ca73d480-ff2d-11e8-92de-acafde227895.png)
+
+Sure - do the following two things:
+
+1) Set the `position` of the module to one of the full-width horizonal positions (`top_bar`, `middle_center` or `bottom_bar`).
+2) Add the following to your `custom.css` file in MagicMirror's `css` folder:
+
+```css
+.mmm-hue-lights .grid {
+    width: auto;
+    display: flex;
+    flex-flow: row wrap;
+    margin: -10px;
+    max-width: none;
+}
+
+.mmm-hue-lights .grid .hue {
+    width: calc(33.33% - 20px);
+    margin: 10px;
+    display: block;
+}
+```
+
+The `33.33%` above means you'll have 3 lights across the screen. If you want 4, change to `25%`. If you want 5, change to `20%`, etc.
+
 ### The colors don't exactly match what's shown in the Hue App
 
 The colors that are shown in this module are an approximation of the colors you'd see in the Hue app. There are some rather funky algorithms going on behind the scenes in the Hue app which I, unfortunately, don't have access to, so these color values should be considered best calculations based on the available data.

@@ -14,8 +14,8 @@ Module.register('mmm-hue-lights', {
     defaults: {
         bridgeIp: '',
         user: '',
-        displayType: 'grid', // 'list' or 'grid'
-        displayMode: 'lights', // 'lights' or 'groups'
+        displayType: 'grid',
+        displayMode: 'lights',
         displayFilter: ['all'],
         hideOff: false,
         alignment: 'left',
@@ -23,7 +23,7 @@ Module.register('mmm-hue-lights', {
         minimalList: false,
         minimalGrid: false,
         minimalGridUltra: false,
-        updateInterval: 20 * 60 * 1000,
+        updateInterval: 2 * 60 * 1000,
         animationSpeed: 2 * 1000,
         initialLoadDelay: 0,
         version: '1.0.0'
@@ -368,7 +368,7 @@ Module.register('mmm-hue-lights', {
                 }
 
                 if (isLights) {
-                    // sold background for lights
+                    // solid background for lights
 
                     lightsOn = 1;
                     colorStyle = 'background-color: ' + mainLightColor.colorHex + ';';
@@ -453,7 +453,6 @@ Module.register('mmm-hue-lights', {
 
                 }
 
-
             } else if (isOn) {
                 // white lights
 
@@ -496,7 +495,6 @@ Module.register('mmm-hue-lights', {
                     itemBrightnessStyle = itemBrightnessInPercent + '%';
                 }
             }
-
 
             // set light text (only relevant for groups)
 

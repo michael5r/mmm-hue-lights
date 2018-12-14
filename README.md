@@ -18,6 +18,7 @@ In order for you to have access to your Hue lights, you need a [Hue developer ac
 - an authorized `user` for your Hue bridge
 
 Please follow the instructions on this page to get both:
+
 https://www.developers.meethue.com/documentation/getting-started
 
 If you don't have a Hue developer account already, click the `register` link on the page above to set one up (it's free).
@@ -50,7 +51,7 @@ Option             | Type      | Default   | Description
 `user`             | `string`  | -         | **This value is required for this module to work.**
 `displayType`      | `string`  | `grid`    | `grid` or `list`
 `displayMode`      | `string`  | `lights`  | `groups` or `lights`
-`displayFilter`    | `array`   | `['all']` | [Array of strings with names of lights/groups that you wish to show.](#how-do-i-filter-which-lights-or-groups-to-show)
+`displayFilter`    | `array`   | `['all']` | [Array of strings with names of lights/groups that you wish to show](#how-do-i-filter-which-lights-or-groups-to-show)
 `hideOff`          | `boolean` | `false`   | Whether to hide lights that are off
 `updateInterval`   | `int`     | `120000`  | How often to load new data, default is 2 minutes
 `initialLoadDelay` | `int`     | `0`       | How long to delay the initial load (in ms)
@@ -144,7 +145,7 @@ This will now display all lights or groups named either `living room` or `office
 
 ### The colors don't exactly match what's shown in the Hue App
 
-The colors that are shown in this module are an approximation of the colors you'd see in the Hue app. There are some rather funky algorithms going on behind the scenes in the Hue app which I, unfortunately, don't have access to, so these colors values should be considered best calculations based on the available data.
+The colors that are shown in this module are an approximation of the colors you'd see in the Hue app. There are some rather funky algorithms going on behind the scenes in the Hue app which I, unfortunately, don't have access to, so these color values should be considered best calculations based on the available data.
 
 
 ## Using Handlebars

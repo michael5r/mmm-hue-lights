@@ -17,6 +17,7 @@ Module.register('mmm-hue-lights', {
         displayType: 'grid',
         displayMode: 'lights',
         displayFilter: ['all'],
+        hideFilter: [],
         hideOff: false,
         alignment: 'left',
         coloredList: true,
@@ -26,7 +27,7 @@ Module.register('mmm-hue-lights', {
         updateInterval: 2 * 60 * 1000,
         animationSpeed: 2 * 1000,
         initialLoadDelay: 0,
-        version: '1.0.0'
+        version: '1.1.0'
     },
 
     getScripts: function() {
@@ -594,6 +595,7 @@ Module.register('mmm-hue-lights', {
 
         var displayMode = this.config.displayMode;
         var displayFilter = this.config.displayFilter;
+        var hideFilter = this.config.hideFilter;
 
         var renderUi = true;
 
@@ -608,7 +610,8 @@ Module.register('mmm-hue-lights', {
         var itemsToFilter = (displayMode === 'lights') ? lights : groups;
         var itemsFilteredOut = 0;
 
-        // check for filtering
+        // check for positive filtering
+
         if (this.isArray(displayFilter)) {
 
             if (displayFilter.length > 0) {
@@ -659,9 +662,34 @@ Module.register('mmm-hue-lights', {
 
             }
 
-        } else {
-            // do nothing
-            // if it's not an array or a string, we'll just show all
+        }
+
+        // check for negative filtering
+
+        if (this.isArray(hideFilter)) {
+            if (hideFilter.length > 0) {
+
+                Object.keys(itemsToFilter).forEach(function(key) {
+
+                    var itemName = itemsToFilter[key].name.toLowerCase();
+                    var deleteItem = false;
+
+                    for (i = 0; i < hideFilter.length; i++) {
+                        var filterString = hideFilter[i].toLowerCase().trim();
+                        if (itemName.indexOf(filterString) > -1) {
+                            // this should be filtered out
+                            deleteItem = true;
+                        }
+                    }
+
+                    if (deleteItem) {
+                        itemsFilteredOut++;
+                        delete itemsToFilter[key];
+                    }
+
+                });
+
+            }
         }
 
         var numberOfLights = (lights) ? Object.keys(data.lights).length : 0;

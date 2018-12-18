@@ -45,16 +45,17 @@ If, however, you wish to modify the HTML structure of the module, read the [Usin
 
 ## General Configuration Options
 
-Option             | Type      | Default   | Description
--------------------|-----------|-----------|-------------------------------------------------------------
-`bridgeIp`         | `string`  | -         | **This value is required for this module to work.**
-`user`             | `string`  | -         | **This value is required for this module to work.**
-`displayType`      | `string`  | `grid`    | `grid` or `list`
-`displayMode`      | `string`  | `lights`  | `groups` or `lights`
-`displayFilter`    | `array`   | `['all']` | [Array of strings with names of lights/groups that you wish to show](#how-do-i-filter-which-lights-or-groups-to-show)
-`hideOff`          | `boolean` | `false`   | Whether to hide lights that are off
-`updateInterval`   | `int`     | `120000`  | How often to load new data, default is 2 minutes
-`initialLoadDelay` | `int`     | `0`       | How long to delay the initial load (in ms)
+Option             | Type      | Default    | Description
+-------------------|-----------|------------|-------------------------------------------------------------
+`bridgeIp`         | `string`  | -          | **This value is required for this module to work.**
+`user`             | `string`  | -          | **This value is required for this module to work.**
+`displayType`      | `string`  | `grid`     | `grid` or `list`
+`displayMode`      | `string`  | `lights`   | `groups` or `lights`
+`displayFilter`    | `array`   | `['all']`  | [Array of strings with names of lights/groups that you wish to **show**](#how-do-i-filter-which-lights-or-groups-to-show)
+`hideFilter`       | `array`   | `[]`       | [Array of strings with names of lights/groups that you wish to **hide**](#how-do-i-filter-which-lights-or-groups-to-show)
+`hideOff`          | `boolean` | `false`    | Whether to hide lights that are off
+`updateInterval`   | `int`     | `120000`   | How often to load new data, default is 2 minutes
+`initialLoadDelay` | `int`     | `0`        | How long to delay the initial load (in ms)
 
 
 ## Configuration Options specific to the Grid view
@@ -129,7 +130,14 @@ With `minimalList` set to `true` and `alignment` set to `right`.
 
 ### How do I filter which lights or groups to show?
 
-The `displayFilter` option accepts an `array` with 1 or more `strings`. The default is `['all']` which displays all lights or all groups (depending on your `displayType`).
+You have two options:
+
+1) `displayFilter` - which filters lights/groups based on which of them you want to **show**
+2) `hideFilter` -  which filters lights/groups based on which of them you want to **hide**
+
+The default for this module is for the `displayFilter` to be set to `['all']` and for the `hideFilter` to be empty which shows all your lights and light groups.
+
+Both the `displayFilter` and `hideFilter` options accept an `array` with 1 or more `strings`.
 
 If, for instance, you only wish to see lights or groups named `living room`, update `displayFilter` to:
 ```js
@@ -141,7 +149,18 @@ You can add multiple strings to the filter - like so:
 displayFilter: ['living room', 'office']
 ```
 
-This will now display all lights or groups named either `living room` or `office`. The filter is not case-sensitive, so `OFFICE` would work as well.
+This will now display all lights or groups named either `living room` or `office` (the filter is not case-sensitive, so `OFFICE` would work as well).
+
+The `hideFilter` works the same way, but in reverse - if you set it to:
+
+```js
+hideFilter: ['living room']
+```
+
+Any lights or light groups named `living room` will now be hidden.
+
+You can combine the two filters for ultimate flexibility in regards to which lights or light groups you wish to show.
+
 
 ### In the grid view is there any way to show the lights or light groups horizontally across the screen?
 
@@ -161,6 +180,7 @@ Sure - do the following two things:
     flex-flow: row wrap;
     margin: -10px;
     max-width: none;
+    justify-content: center;
 }
 
 .mmm-hue-lights .grid .hue {

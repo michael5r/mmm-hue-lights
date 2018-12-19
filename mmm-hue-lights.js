@@ -27,7 +27,7 @@ Module.register('mmm-hue-lights', {
         updateInterval: 2 * 60 * 1000,
         animationSpeed: 2 * 1000,
         initialLoadDelay: 0,
-        version: '1.1.0'
+        version: '1.2.0'
     },
 
     getScripts: function() {
@@ -606,6 +606,15 @@ Module.register('mmm-hue-lights', {
 
         var lights = data.lights;
         var groups = data.groups;
+
+        // for the groups, let's immediately filter out anything that doesn't have a type of 'Room'
+
+        Object.keys(data.groups).forEach(function(key) {
+            var itemType = data.groups[key].type.toLowerCase();
+            if (itemType !== 'room') {
+                delete data.groups[key];
+            }
+        });
 
         var itemsToFilter = (displayMode === 'lights') ? lights : groups;
         var itemsFilteredOut = 0;

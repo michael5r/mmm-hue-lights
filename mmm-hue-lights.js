@@ -611,7 +611,6 @@ Module.register('mmm-hue-lights', {
 
         Object.keys(data.groups).forEach(function(key) {
             var itemType = data.groups[key].type.toLowerCase();
-            console.log(itemType);
             if (itemType !== 'room') {
                 delete data.groups[key];
             }

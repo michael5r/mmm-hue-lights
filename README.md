@@ -1,6 +1,7 @@
 # Module: mmm-hue-lights
 
 The `mmm-hue-lights` module is a [MagicMirror](https://github.com/MichMich/MagicMirror) addon.
+This module requires MagicMirror version `2.5` or later.
 
 This module displays the status of your [Philips Hue](http://meethue.com) lights and light groups on your Magic Mirror and and supports multiple view types and modes.
 
@@ -28,11 +29,11 @@ To use this module, simply add it to the `modules` array in the MagicMirror `con
 
 ```js
 {
-    module: 'mmm-hue-lights',
-    position: 'top_right', // pick whichever position you want
+    module: "mmm-hue-lights",
+    position: "top_right", // pick whichever position you want
     config: {
-        bridgeIp: <HUE_BRIDGE_IP>,
-        user: <HUE_BRIDGE_USER>,
+        bridgeIp: "<HUE_BRIDGE_IP>",
+        user: "<HUE_BRIDGE_USER>",
         // ... and whatever else configuration options you want to use
     }
 },
@@ -45,17 +46,19 @@ If, however, you wish to modify the HTML structure of the module, read the [Usin
 
 ## General Configuration Options
 
-Option             | Type      | Default    | Description
--------------------|-----------|------------|-------------------------------------------------------------
-`bridgeIp`         | `string`  | -          | **This value is required for this module to work.**
-`user`             | `string`  | -          | **This value is required for this module to work.**
-`displayType`      | `string`  | `grid`     | `grid` or `list`
-`displayMode`      | `string`  | `lights`   | `groups` or `lights`
-`displayFilter`    | `array`   | `['all']`  | [Array of strings with names of lights/groups that you wish to **show**](#how-do-i-filter-which-lights-or-groups-to-show)
-`hideFilter`       | `array`   | `[]`       | [Array of strings with names of lights/groups that you wish to **hide**](#how-do-i-filter-which-lights-or-groups-to-show)
-`hideOff`          | `boolean` | `false`    | Whether to hide lights that are off
-`updateInterval`   | `int`     | `120000`   | How often to load new data, default is 2 minutes
-`initialLoadDelay` | `int`     | `0`        | How long to delay the initial load (in ms)
+Option               | Type      | Default    | Description
+---------------------|-----------|------------|-------------------------------------------------------------
+`bridgeIp`           | `string`  | -          | **This value is required for this module to work.**
+`user`               | `string`  | -          | **This value is required for this module to work.**
+`displayType`        | `string`  | `grid`     | `grid` or `list`
+`displayMode`        | `string`  | `lights`   | `groups` or `lights`
+`displayFilter`      | `array`   | `['all']`  | [Array of strings with names of lights/groups that you wish to **show**](#how-do-i-filter-which-lights-or-groups-to-show)
+`hideFilter`         | `array`   | `[]`       | [Array of strings with names of lights/groups that you wish to **hide**](#how-do-i-filter-which-lights-or-groups-to-show)
+`hideOff`            | `boolean` | `false`    | Whether to hide lights that are off
+`updateInterval`     | `int`     | `120000`   | How often to load new data, default is 2 minutes
+`initialLoadDelay`   | `int`     | `0`        | How long to delay the initial load (in ms)
+`motionSleep`        | `boolean` | `false`    | Suspend module when triggered by [MMM-PIR-Sensor](https://github.com/paviro/MMM-PIR-Sensor)
+`motionSleepSeconds` | `int`     | `300`      | When motion is triggered, how long to wait before going to sleep. Default is 5 minutes.
 
 
 ## Configuration Options specific to the Grid view
@@ -195,6 +198,19 @@ The `33.33%` above means you'll have 3 lights across the screen. If you want 4, 
 ### The colors don't exactly match what's shown in the Hue App
 
 The colors that are shown in this module are an approximation of the colors you'd see in the Hue app. There are some rather funky algorithms going on behind the scenes in the Hue app which I, unfortunately, don't have access to, so these color values should be considered best calculations based on the available data.
+
+### How does the motionSleep setting work?
+
+Setting the `motionSleep` setting to `true` makes this module continually listen for `USER_PRESENCE` notifications from the [MMM-PIR-Sensor](https://github.com/paviro/MMM-PIR-Sensor) module. Whenever a positive `USER_PRESENCE` notification is received, the module will reset a timer based on your `motionSleepSeconds` setting. When the timer reaches zero, the module will then do two things:
+
+- temporarily stop pulling new data from Nest
+- hide the mmm-hue-lights module
+
+You specify how long this timer should last by using the `motionSleepSeconds` setting - please note that this setting is in **seconds** (not ms).
+
+This sleep mode will last till the next positive `USER_PRESENCE` notification is received, at which point the module will resume by immediately pulling new Nest data and then showing the mmm-hue-lights module again.
+
+This is a good option to enable if you're using a monitor that shows an ugly "no signal message" when the HDMI signal is lost and you've therefore turned off the `powerSaving` setting in the MMM-Pir-Sensor module.
 
 
 ## Using Handlebars

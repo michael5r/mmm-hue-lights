@@ -24,10 +24,12 @@ Module.register('mmm-hue-lights', {
         minimalList: false,
         minimalGrid: false,
         minimalGridUltra: false,
+        motionSleep: false,
+        motionSleepSeconds: 300, // this is in seconds (not ms)
         updateInterval: 2 * 60 * 1000,
         animationSpeed: 2 * 1000,
         initialLoadDelay: 0,
-        version: '1.2.0'
+        version: '1.3.0'
     },
 
     getScripts: function() {
@@ -51,6 +53,9 @@ Module.register('mmm-hue-lights', {
 
         this.loaded = false;
         this.scheduleUpdate(this.config.initialLoadDelay);
+
+        this.sleepTimer = null;
+        this.sleeping = false;
 
         this.lights = {};
         this.groups = {};
@@ -563,14 +568,35 @@ Module.register('mmm-hue-lights', {
 
     getData: function() {
 
-        if ((this.config.bridgeIp === '') || (this.config.user === '')) {
-            this.errMsg = 'Please add your Hue bridge IP and user to the MagicMirror config.js file.';
-            this.updateDom(this.config.animationSpeed);
-        } else {
-            this.sendSocketNotification('MMM_HUE_LIGHTS_GET', {
-                bridgeIp: this.config.bridgeIp,
-                user: this.config.user
-            });
+        if ((this.motionSleep && !this.sleeping) || (!this.motionSleep)) {
+
+            if ((this.config.bridgeIp === '') || (this.config.user === '')) {
+                this.errMsg = 'Please add your Hue bridge IP and user to the MagicMirror config.js file.';
+                this.updateDom(this.config.animationSpeed);
+            } else {
+                this.sendSocketNotification('MMM_HUE_LIGHTS_GET', {
+                    bridgeIp: this.config.bridgeIp,
+                    user: this.config.user
+                });
+            }
+
+        }
+
+    },
+
+    notificationReceived(notification, payload, sender) {
+
+        if ((notification === 'USER_PRESENCE') && (this.config.motionSleep)) {
+            if (payload === true) {
+                if (this.sleeping) {
+                    this.resumeModule();
+                } else {
+                    clearTimeout(self.sleepTimer);
+                    self.sleepTimer = setTimeout(function() {
+                        self.suspendModule()
+                    }, self.config.motionSleepSeconds * 1000);
+                }
+            }
         }
 
     },
@@ -585,6 +611,38 @@ Module.register('mmm-hue-lights', {
         } else if (notification === 'MMM_HUE_LIGHTS_DATA_ERROR') {
             self.errMsg = payload;
             self.updateDom(self.config.animationSpeed);
+        }
+
+    },
+
+    suspendModule: function() {
+
+        var self = this;
+
+        this.hide(self.config.animationSpeed, function() {
+            self.sleeping = true;
+        });
+
+    },
+
+    resumeModule: function() {
+
+        var self = this;
+
+        if (this.sleeping) {
+
+            this.sleeping = false;
+
+            // get new data
+            this.getData();
+
+            this.show(self.config.animationSpeed, function() {
+                // restart timer
+                clearTimeout(self.sleepTimer);
+                self.sleepTimer = setTimeout(function() {
+                    self.suspendModule()
+                }, self.config.motionSleepSeconds * 1000);
+            });
         }
 
     },

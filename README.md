@@ -203,12 +203,12 @@ The colors that are shown in this module are an approximation of the colors you'
 
 Setting the `motionSleep` setting to `true` makes this module continually listen for `USER_PRESENCE` notifications from the [MMM-PIR-Sensor](https://github.com/paviro/MMM-PIR-Sensor) module. Whenever a positive `USER_PRESENCE` notification is received, the module will reset a timer based on your `motionSleepSeconds` setting. When the timer reaches zero, the module will then do two things:
 
-- temporarily stop pulling new data from Nest
+- temporarily stop pulling new data from Hue
 - hide the mmm-hue-lights module
 
 You specify how long this timer should last by using the `motionSleepSeconds` setting - please note that this setting is in **seconds** (not ms).
 
-This sleep mode will last till the next positive `USER_PRESENCE` notification is received, at which point the module will resume by immediately pulling new Nest data and then showing the mmm-hue-lights module again.
+This sleep mode will last till the next positive `USER_PRESENCE` notification is received, at which point the module will resume by immediately pulling new Hue data and then showing the mmm-hue-lights module again.
 
 This is a good option to enable if you're using a monitor that shows an ugly "no signal message" when the HDMI signal is lost and you've therefore turned off the `powerSaving` setting in the MMM-Pir-Sensor module.
 

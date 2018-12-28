@@ -29,7 +29,7 @@ Module.register('mmm-hue-lights', {
         updateInterval: 2 * 60 * 1000,
         animationSpeed: 2 * 1000,
         initialLoadDelay: 0,
-        version: '1.3.1'
+        version: '1.3.2'
     },
 
     getScripts: function() {
@@ -598,18 +598,6 @@ Module.register('mmm-hue-lights', {
                     this.sleepTimer = setTimeout(function() {
                         self.hide(self.config.animationSpeed);
                     }, self.config.motionSleepSeconds * 1000);
-                }
-            }
-
-        } else if (notification === 'MMM_ENERGY_SAVER') {
-
-            if (payload === 'suspend') {
-                if (!this.sleeping) {
-                    this.hide(this.config.animationSpeed);
-                }
-            } else if (payload === 'resume') {
-                if (this.sleeping) {
-                    this.show(this.config.animationSpeed);
                 }
             }
 

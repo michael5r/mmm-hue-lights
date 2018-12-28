@@ -586,6 +586,8 @@ Module.register('mmm-hue-lights', {
 
     notificationReceived(notification, payload, sender) {
 
+        var self = this;
+
         if ((notification === 'USER_PRESENCE') && (this.config.motionSleep)) {
             if (payload === true) {
                 if (this.sleeping) {

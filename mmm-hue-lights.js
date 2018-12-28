@@ -29,7 +29,7 @@ Module.register('mmm-hue-lights', {
         updateInterval: 2 * 60 * 1000,
         animationSpeed: 2 * 1000,
         initialLoadDelay: 0,
-        version: '1.3.0'
+        version: '1.3.1'
     },
 
     getScripts: function() {
@@ -568,7 +568,7 @@ Module.register('mmm-hue-lights', {
 
     getData: function() {
 
-        if ((this.motionSleep && !this.sleeping) || (!this.motionSleep)) {
+        if (!this.sleeping) {
 
             if ((this.config.bridgeIp === '') || (this.config.user === '')) {
                 this.errMsg = 'Please add your Hue bridge IP and user to the MagicMirror config.js file.';
@@ -589,16 +589,30 @@ Module.register('mmm-hue-lights', {
         var self = this;
 
         if ((notification === 'USER_PRESENCE') && (this.config.motionSleep)) {
+
             if (payload === true) {
                 if (this.sleeping) {
-                    this.resumeModule();
+                    this.show(this.config.animationSpeed);
                 } else {
-                    clearTimeout(self.sleepTimer);
-                    self.sleepTimer = setTimeout(function() {
-                        self.suspendModule()
+                    clearTimeout(this.sleepTimer);
+                    this.sleepTimer = setTimeout(function() {
+                        self.hide(self.config.animationSpeed);
                     }, self.config.motionSleepSeconds * 1000);
                 }
             }
+
+        } else if (notification === 'MMM_ENERGY_SAVER') {
+
+            if (payload === 'suspend') {
+                if (!this.sleeping) {
+                    this.hide(this.config.animationSpeed);
+                }
+            } else if (payload === 'resume') {
+                if (this.sleeping) {
+                    this.show(this.config.animationSpeed);
+                }
+            }
+
         }
 
     },
@@ -617,17 +631,15 @@ Module.register('mmm-hue-lights', {
 
     },
 
-    suspendModule: function() {
+    suspend: function() {
+        // this method is triggered when a module is hidden using this.hide()
 
-        var self = this;
-
-        this.hide(self.config.animationSpeed, function() {
-            self.sleeping = true;
-        });
+        this.sleeping = true;
 
     },
 
-    resumeModule: function() {
+    resume: function() {
+        // this method is triggered when a module is shown using this.show()
 
         var self = this;
 
@@ -638,13 +650,13 @@ Module.register('mmm-hue-lights', {
             // get new data
             this.getData();
 
-            this.show(self.config.animationSpeed, function() {
-                // restart timer
-                clearTimeout(self.sleepTimer);
-                self.sleepTimer = setTimeout(function() {
-                    self.suspendModule()
+            // restart timer
+            if (this.config.motionSleep) {
+                clearTimeout(this.sleepTimer);
+                this.sleepTimer = setTimeout(function() {
+                    self.hide(self.config.animationSpeed);
                 }, self.config.motionSleepSeconds * 1000);
-            });
+            }
         }
 
     },

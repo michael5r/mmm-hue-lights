@@ -9,8 +9,29 @@ This module displays the status of your [Philips Hue](http://meethue.com) lights
 
 *An example showing light groups on the left and lights on the right in the Grid view.*
 
+
+## Table of Contents
+
+- [Installing the module](#installing-the-module)
+- [Getting the Hue credentials](#getting-the-hue-credentials)
+- [Using the module](#using-the-module)
+- [General Configuration Options](#general-configuration-options)
+- [Configuration Options specific to the Grid view](#configuration-options-specific-to-the-grid-view)
+- [Configuration Options specific to the List view](#configuration-options-specific-to-the-list-view)
+- [How It Looks](#how-it-looks)
+  * [Grid View](#grid-view)
+  * [List View](#list-view)
+- [FAQ](#faq)
+  * [How do I filter which lights or groups to show?](#how-do-i-filter-which-lights-or-groups-to-show)
+  * [In the grid view is there any way to show the lights or light groups horizontally across the screen?](#in-the-grid-view-is-there-any-way-to-show-the-lights-or-light-groups-horizontally-across-the-screen)
+  * [The colors don't exactly match what's shown in the Hue App](#the-colors-dont-exactly-match-whats-shown-in-the-hue-app)
+  * [How does the motionSleep setting work?](#how-does-the-motionsleep-setting-work)
+- [Using Handlebars](#using-handlebars)
+
+
 ## Installing the module
 Run `git clone https://github.com/michael5r/mmm-hue-lights.git` from inside your `MagicMirror/modules` folder.
+
 
 ## Getting the Hue credentials
 In order for you to have access to your Hue lights, you need a [Hue developer account](https://developers.meethue.com) and a couple of things:
@@ -23,6 +44,7 @@ Please follow the instructions on this page to get both:
 https://www.developers.meethue.com/documentation/getting-started
 
 If you don't have a Hue developer account already, click the `register` link on the page above to set one up (it's free).
+
 
 ## Using the module
 To use this module, simply add it to the `modules` array in the MagicMirror `config/config.js` file:

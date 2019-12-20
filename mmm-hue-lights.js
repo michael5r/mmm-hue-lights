@@ -764,6 +764,29 @@ Module.register('mmm-hue-lights', {
         var numberOfLights = (lights) ? Object.keys(data.lights).length : 0;
         var numberOfGroups = (groups) ? Object.keys(data.groups).length : 0;
 
+        // check if lights of each group is reachable
+        // no reachable lights will be "marked" as off
+        Object.values(data.groups).forEach(function (group, index) {
+
+            var number_of_lights_in_group = group.lights.length;
+            var any_on = false;
+
+            for (var i = 0; i < number_of_lights_in_group; i++) {
+                var hueLightID = group.lights[i];
+
+                if(data.lights[hueLightID].state.reachable == false) {
+                    // if light is not reachable
+                    data.lights[hueLightID].state.on = false;
+                    group.state.all_on = false;
+                } else {
+                    if(data.lights[hueLightID].state.on == true) {
+                        any_on = true;
+                    }
+                }
+            }
+            group.state.any_on = any_on;
+        });
+
         // check old data to make sure we're not re-rendering the UI for no reason
         if (this.loaded) {
 

@@ -24,6 +24,7 @@ Module.register('mmm-hue-lights', {
         minimalList: false,
         minimalGrid: false,
         minimalGridUltra: false,
+        orderByName: false,
         motionSleep: false,
         motionSleepSeconds: 300, // this is in seconds (not ms)
         updateInterval: 2 * 60 * 1000,
@@ -127,6 +128,7 @@ Module.register('mmm-hue-lights', {
         var hideOff = this.config.hideOff;
         var minimalList = this.config.minimalList;
         var alignment = this.config.alignment;
+        var orderByName = this.config.orderByName;
 
         var lights = this.lights;
         var groups = this.groups;
@@ -144,10 +146,15 @@ Module.register('mmm-hue-lights', {
         };
 
         var data = isLights ? lights : groups;
+        var dataArr = Object.values(data); // convert to array
 
-        Object.keys(data).forEach(function(key) {
+        // sort by name if orderByName is true
+        if (orderByName) {
+            dataArr.sort((a, b) => (a.name > b.name) ? 1 : -1);
+        }
 
-            var item = data[key];
+        dataArr.forEach(function(item) {
+
             var itemColorData = isLights ? item.state : item.action;
 
             var isOn = false;
@@ -294,6 +301,7 @@ Module.register('mmm-hue-lights', {
         var minimalGrid = this.config.minimalGrid;
         var minimalGridUltra = isLights ? this.config.minimalGridUltra : false;
         var hideOff = this.config.hideOff;
+        var orderByName = this.config.orderByName;
 
         var lights = this.lights;
         var groups = this.groups;
@@ -312,10 +320,15 @@ Module.register('mmm-hue-lights', {
         // create rows
 
         var data = isLights ? lights : groups;
+        var dataArr = Object.values(data); // convert to array
 
-        Object.keys(data).forEach(function(key) {
+        // sort by name if orderByName is true
+        if (orderByName) {
+            dataArr.sort((a, b) => (a.name > b.name) ? 1 : -1);
+        }
 
-            var item = data[key];
+        dataArr.forEach(function(item) {
+
             var itemColorData = isLights ? item.state : item.action;
             var type = item.type.toLowerCase();
 
@@ -657,6 +670,7 @@ Module.register('mmm-hue-lights', {
         var hideFilter = this.config.hideFilter;
 
         var renderUi = true;
+        var forceRender = false;
 
         var oldLights = this.lights;
         var oldGroups = this.groups;
@@ -767,23 +781,26 @@ Module.register('mmm-hue-lights', {
         // no reachable lights will be "marked" as off
         Object.values(data.groups).forEach(function (group, index) {
 
-            var number_of_lights_in_group = group.lights.length;
+            var numberOfLightsInGroup = group.lights.length;
             var any_on = false;
 
-            for (var i = 0; i < number_of_lights_in_group; i++) {
+            for (var i = 0; i < numberOfLightsInGroup; i++) {
                 var hueLightID = group.lights[i];
 
-                if(data.lights[hueLightID].state.reachable == false) {
+                if (data.lights[hueLightID].state.reachable == false) {
                     // if light is not reachable
                     data.lights[hueLightID].state.on = false;
                     group.state.all_on = false;
+                    forceRender = true;
                 } else {
-                    if(data.lights[hueLightID].state.on == true) {
+                    if (data.lights[hueLightID].state.on == true) {
                         any_on = true;
                     }
                 }
             }
+
             group.state.any_on = any_on;
+
         });
 
         // check old data to make sure we're not re-rendering the UI for no reason
@@ -793,6 +810,8 @@ Module.register('mmm-hue-lights', {
                 // number of lights changed (update dom)
             } else if (numberOfOldGroups !== numberOfGroups) {
                 // number of groups changed (update dom)
+            } else if (forceRender) {
+                // force render (update dom)
             } else {
                 // compare status of lights
                 if ((this.jsonEqual(oldLights,lights)) && (this.jsonEqual(oldGroups,groups))) {

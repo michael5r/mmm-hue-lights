@@ -77,6 +77,7 @@ Option               | Type      | Default    | Description
 `displayFilter`      | `array`   | `['all']`  | [Array of strings with names of lights/groups that you wish to **show**](#how-do-i-filter-which-lights-or-groups-to-show)
 `hideFilter`         | `array`   | `[]`       | [Array of strings with names of lights/groups that you wish to **hide**](#how-do-i-filter-which-lights-or-groups-to-show)
 `hideOff`            | `boolean` | `false`    | Whether to hide lights that are off
+`orderByName`        | `boolean` | `false`    | Whether to display lights or groups alphabetically
 `updateInterval`     | `int`     | `120000`   | How often to load new data, default is 2 minutes
 `initialLoadDelay`   | `int`     | `0`        | How long to delay the initial load (in ms)
 `motionSleep`        | `boolean` | `false`    | Suspend module when triggered by [MMM-PIR-Sensor](https://github.com/paviro/MMM-PIR-Sensor)

@@ -29,7 +29,7 @@ Module.register('mmm-hue-lights', {
         updateInterval: 2 * 60 * 1000,
         animationSpeed: 2 * 1000,
         initialLoadDelay: 0,
-        version: '1.3.2'
+        version: '1.4.0'
     },
 
     getScripts: function() {

@@ -611,12 +611,11 @@ Module.register('mmm-hue-lights', {
 
         if (notification === 'MMM_HUE_LIGHTS_DATA') {
             self.processHueData(payload);
-            self.scheduleUpdate(self.config.updateInterval);
         } else if (notification === 'MMM_HUE_LIGHTS_DATA_ERROR') {
             self.errMsg = payload;
             self.updateDom(self.config.animationSpeed);
         }
-
+        self.scheduleUpdate(self.config.updateInterval);
     },
 
     suspend: function() {

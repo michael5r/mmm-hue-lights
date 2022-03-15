@@ -1,4 +1,4 @@
-var NodeHelper = require("node_helper");
+var NodeHelper = require('node_helper');
 var axios = require('axios').default;
 
 module.exports = NodeHelper.create({

@@ -5,6 +5,8 @@ This module requires MagicMirror version `2.5` or later.
 
 This module displays the status of your [Philips Hue](http://meethue.com) lights and light groups on your Magic Mirror and and supports multiple view types and modes.
 
+Please note that this module still uses v1 of the Hue API - once v2 of the Hue API has been released, I'll get the module updated.  
+
 ![image](https://user-images.githubusercontent.com/3209660/49979103-2e3cd400-ff13-11e8-8f76-bc4c7d5e7b76.png)
 
 *An example showing light groups on the left and lights on the right in the Grid view.*
@@ -41,7 +43,7 @@ In order for you to have access to your Hue lights, you need a [Hue developer ac
 
 Please follow the instructions on this page to get both:
 
-https://www.developers.meethue.com/documentation/getting-started
+https://developers.meethue.com/develop/get-started-2/
 
 If you don't have a Hue developer account already, click the `register` link on the page above to set one up (it's free).
 

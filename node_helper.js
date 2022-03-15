@@ -1,5 +1,5 @@
-var NodeHelper = require('node_helper');
-var request = require('request');
+var NodeHelper = require("node_helper");
+var axios = require('axios').default;
 
 module.exports = NodeHelper.create({
 
@@ -17,20 +17,21 @@ module.exports = NodeHelper.create({
             var url = 'http://' + bridgeIp + '/api/' + user;
             var self = this;
 
-            request(url, {method: 'GET'}, function(err, res, body) {
-
-                if ((err) || (res.statusCode !== 200)) {
-                    self.sendSocketNotification('MMM_HUE_LIGHTS_DATA_ERROR', 'Hue API Error: ' + err);
-                } else {
-                    if (body === {}) {
-                        self.sendSocketNotification('MMM_HUE_LIGHTS_DATA_ERROR', 'Hue API Error: No Hue data was received.');
+            axios.get(url)
+                .then(function (res) {
+                    if (res.status !== 200) {
+                        self.sendSocketNotification('MMM_HUE_LIGHTS_DATA_ERROR', 'Hue API Error: ' + res.status);
                     } else {
-                        var data = JSON.parse(body);
-                        self.sendSocketNotification('MMM_HUE_LIGHTS_DATA', data);
+                        if (res.data === {}) {
+                            self.sendSocketNotification('MMM_HUE_LIGHTS_DATA_ERROR', 'Hue API Error: No Hue data was received.');
+                        } else {
+                            self.sendSocketNotification('MMM_HUE_LIGHTS_DATA', res.data);
+                        }
                     }
-                }
-
-            });
+                })
+                .catch(function (err) {
+                    self.sendSocketNotification('MMM_HUE_LIGHTS_DATA_ERROR', 'Hue API Error: ' + err);
+                });
 
         }
     }

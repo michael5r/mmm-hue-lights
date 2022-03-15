@@ -1,6 +1,6 @@
 {
   "name": "mmm-hue-lights",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Display the status of your Philips Hue lights and light groups on your MagicMirror. Supports multiple view types and modes.",
   "repository": {
     "type": "git",

@@ -364,6 +364,7 @@ Module.register('mmm-hue-lights', {
             var colorStyle = false;
             var lightOrDark = 'dark'; // default
             var lightsOn = 0;
+            var coloredlightsOn = 0;
             var contrast;
 
             var hasColors = (itemColorData.colormode) && ((itemColorData.colormode === 'xy') || (itemColorData.colormode === 'hs'));
@@ -403,6 +404,7 @@ Module.register('mmm-hue-lights', {
                         var light = self.lights[lightId];
                         if (light) {
                             if (light.state.on) {
+                                lightsOn++;
                                 itemBrightness += light.state.bri;
                                 var lightColor = self.getHueColorStyle(light);
                                 if (lightColor.colorHex) {
@@ -444,7 +446,7 @@ Module.register('mmm-hue-lights', {
                             lightOrDark = 'light';
                         }
 
-                        lightsOn = colorRgbArr.length;
+                        coloredlightsOn = colorRgbArr.length;
 
                         for (j = 0; j < colorRgbSortedArr.length; j++) {
 
@@ -466,7 +468,7 @@ Module.register('mmm-hue-lights', {
                             colorStyle += ');';
                         }
 
-                        itemBrightness = itemBrightness / lightsOn;
+                        itemBrightness = itemBrightness / coloredlightsOn;
 
                     }
 

@@ -32,7 +32,8 @@ Please note that this module still uses v1 of the Hue API - once v2 of the Hue A
 
 
 ## Installing the module
-Run `git clone https://github.com/michael5r/mmm-hue-lights.git` from inside your `MagicMirror/modules` folder.
+1. Run `git clone https://github.com/michael5r/mmm-hue-lights.git` from inside your `MagicMirror/modules` folder.
+2. Enter the new `mmm-hue-lights` directory and execute `npm install`.
 
 
 ## Getting the Hue credentials

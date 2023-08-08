@@ -1,0 +1,40 @@
+<script>
+	Module = {
+		register: (name, content) => {
+			console.log(name, content);
+			mod = content;
+		},
+	};
+	Log = console;
+</script>
+<script src="../mmm-hue-lights.js"></script>
+<script>
+	mod
+		.getScripts()
+		.forEach((i) => document.write(`<script src="../${i}"><\/script>`));
+	mod
+		.getStyles()
+		.forEach((i) => document.write(`<link rel="stylesheet" href="../${i}">`));
+</script>
+
+<div class="mod mmm-hue-lights"></div>
+<script>
+	mod.updateDom = () => document.querySelector(".mod").append(mod.getDom());
+	mod.sendSocketNotification = () => {};
+	mod.config = mod.defaults;
+	mod.config.bridgeIp = "mock-IP";
+	mod.config.user = "mockUser";
+
+	mod.loaded = true;
+	mod.start();
+	mod.loaded = true;
+
+	fetch("hue.json")
+		.then((response) => response.json())
+		.then((data) => {
+			mod.lights = data.lights;
+			mod.loaded = true;
+			console.log(mod.getDom());
+			mod.updateDom();
+		});
+</script>

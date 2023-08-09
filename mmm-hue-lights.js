@@ -129,7 +129,7 @@ Module.register("mmm-hue-lights", {
 
   toggleLight: function (lightNum, isOn) {
     const state = isOn ? "OFF" : "ON";
-    const hueUrl = `http://${this.config.bridgeIp}/api/${this.config.user}/lights/${lightNum}/state`;
+    const hueUrl = `http://${this.config.bridgeIp}/api/${this.config.user}/${this.config.displayMode}/${lightNum}/state`;
     this.sendSocketNotification(`TURN_${state}_LIGHTS`, hueUrl);
   },
 

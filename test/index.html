@@ -28,12 +28,14 @@
 	mod.config.bridgeIp = "mock-bridge-ip";
 	mod.config.user = "mock-user";
 	mod.config.orderByName = true;
+	mod.config.displayMode = "groups";
 
 	mod.start();
-	fetch("hue.json")
+	fetch("marks_hue.json")
 		.then((response) => response.json())
 		.then((data) => {
 			mod.lights = data.lights;
+			mod.groups = data.groups;
 			mod.loaded = true;
 			mod.updateDom();
 		});

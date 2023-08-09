@@ -8,7 +8,7 @@
                     {{ name}}
                     {{#if lightText }}<small>{{ lightText }}</small>{{/if}}
                 </div>
-                {{#unless isMinimal }}<div class="toggle"></div>{{/unless}}
+                {{#unless isMinimal }}<a data-light-num="{{ lightNum }}" data-is-on="{{ isOn }}"><div class="toggle"></div></a>{{/unless}}
             </div>
         {{/unless}}
 

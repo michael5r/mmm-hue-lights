@@ -3,6 +3,7 @@
 		register: (name, content) => {
 			console.log(name, content);
 			mod = content;
+			mod.name = name;
 		},
 	};
 	Log = console;
@@ -18,23 +19,22 @@
 </script>
 
 <div class="mod mmm-hue-lights"></div>
+
 <script>
 	mod.updateDom = () => document.querySelector(".mod").append(mod.getDom());
-	mod.sendSocketNotification = () => {};
+	mod.sendSocketNotification = (command, url) => console.log(command, url);
+
 	mod.config = mod.defaults;
-	mod.config.bridgeIp = "mock-IP";
-	mod.config.user = "mockUser";
+	mod.config.bridgeIp = "mock-bridge-ip";
+	mod.config.user = "mock-user";
+	mod.config.orderByName = true;
 
-	mod.loaded = true;
 	mod.start();
-	mod.loaded = true;
-
 	fetch("hue.json")
 		.then((response) => response.json())
 		.then((data) => {
 			mod.lights = data.lights;
 			mod.loaded = true;
-			console.log(mod.getDom());
 			mod.updateDom();
 		});
 </script>

@@ -107,9 +107,30 @@ Module.register("mmm-hue-lights", {
         displayMode === "groups" ? "groups" : ""
       );
       outer_wrapper.innerHTML = this.renderGrid();
+
+      outer_wrapper.addEventListener("click", (event) => this.onClick(event));
     }
 
     return outer_wrapper;
+  },
+
+  onClick: function (event) {
+    let el = event.target;
+    while (!/A/i.test(el.tagName) && el.parentElement) {
+      el = el.parentElement;
+    }
+
+    const lightNum = el.dataset.lightNum;
+    const isOn = el.dataset.isOn === "true";
+    if (lightNum) {
+      this.toggleLight(lightNum, isOn);
+    }
+  },
+
+  toggleLight: function (lightNum, isOn) {
+    const state = isOn ? "OFF" : "ON";
+    const hueUrl = `http://${this.config.bridgeIp}/api/${this.config.user}/lights/${lightNum}/state`;
+    this.sendSocketNotification(`TURN_${state}_LIGHTS`, hueUrl);
   },
 
   renderList: function () {
@@ -302,14 +323,16 @@ Module.register("mmm-hue-lights", {
     // create rows
 
     var data = isLights ? lights : groups;
-    var dataArr = Object.values(data); // convert to array
+    var dataArr = Object.entries(data); // convert to array
 
     // sort by name if orderByName is true
     if (orderByName) {
-      dataArr.sort((a, b) => (a.name > b.name ? 1 : -1));
+      dataArr.sort((a, b) => (a[1].name > b[1].name ? 1 : -1));
     }
 
-    dataArr.forEach(function (item) {
+    dataArr.forEach(function (items) {
+      const [lightNum, item] = items;
+
       var itemColorData = isLights ? item.state : item.action;
       var type = item.type.toLowerCase();
 
@@ -546,7 +569,8 @@ Module.register("mmm-hue-lights", {
       // push data to HB object
 
       var rowObj = {
-        isOn: isOn,
+        lightNum,
+        isOn,
         isMinimal: minimalGrid || minimalGridUltra ? true : false,
         isMinimalUltra: minimalGridUltra,
         name: item.name,

@@ -10,6 +10,20 @@
 </script>
 <script src="../mmm-hue-lights.js"></script>
 <script>
+	require = () => {
+		return {
+			default: null,
+			create: (content) => {
+				console.log("node_helper", content);
+				helper = content;
+				helper.name = mod.name;
+			},
+		};
+	};
+	module = {};
+</script>
+<script src="../node_helper.js"></script>
+<script>
 	mod
 		.getScripts()
 		.forEach((i) => document.write(`<script src="../${i}"><\/script>`));
@@ -22,14 +36,23 @@
 
 <script>
 	mod.updateDom = () => document.querySelector(".mod").append(mod.getDom());
-	mod.sendSocketNotification = (command, url) => console.log(command, url);
+	mod.sendSocketNotification = (notification, payload) => {
+		console.log(notification, payload);
+		if (notification === "MMM_HUE_LIGHTS_GET") return;
+		helper.socketNotificationReceived(notification, payload);
+	};
+	helper.sendSocketNotification = (notification, payload) => {
+		console.log(notification, payload);
+		mod.socketNotificationReceived(notification, payload);
+	};
 
 	mod.config = mod.defaults;
-	mod.config.bridgeIp = "mock-bridge-ip";
+	mod.config.bridgeIp = "127.0.0.1:8080";
 	mod.config.user = "mock-user";
 	mod.config.orderByName = true;
 	mod.config.displayMode = "groups";
 
+	helper.start();
 	mod.start();
 	fetch("marks_hue.json")
 		.then((response) => response.json())

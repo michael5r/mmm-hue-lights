@@ -8,11 +8,18 @@
   },
   "main": "mmm-hue-lights.js",
   "scripts": {
+    "start": "npm run build && live-server --open=test --watch=test",
+    "build": "cp node_modules/handlebars/dist/handlebars.runtime.min.js . && handlebars templates/*.hbs -f mmm-hue-lights-templates.js -m",
     "test": "echo \"Error: No tests specified\" && exit 1"
   },
   "author": "Michael Schmidt",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.26.0"
+  },
+  "devDependencies": {
+    "handlebars": "^4.7.8",
+    "live-server": "^1.2.1",
+    "prettier": "^2.8.8"
   }
 }

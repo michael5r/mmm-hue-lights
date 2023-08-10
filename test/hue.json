@@ -1,0 +1,127 @@
+{
+  "lights": {
+    "1": {
+      "state": {
+        "on": true,
+        "bri": 254,
+        "hue": 0,
+        "sat": 211,
+        "xy": [0.6251, 0.3313],
+        "ct": 500,
+        "alert": "none",
+        "effect": "none",
+        "colormode": "hs",
+        "reachable": true
+      },
+      "type": "Extended color light",
+      "name": "Middle Light",
+      "modelid": "LCT001",
+      "swversion": "65003148",
+      "pointsymbol": {
+        "1": "none",
+        "2": "none",
+        "3": "none",
+        "4": "none",
+        "5": "none",
+        "6": "none",
+        "7": "none",
+        "8": "none"
+      }
+    },
+    "2": {
+      "state": {
+        "on": false,
+        "bri": 254,
+        "hue": 0,
+        "sat": 253,
+        "xy": [0.6738, 0.3222],
+        "ct": 500,
+        "alert": "none",
+        "effect": "none",
+        "colormode": "hs",
+        "reachable": true
+      },
+      "type": "Extended color light",
+      "name": "Far Light",
+      "modelid": "LCT001",
+      "swversion": "65003148",
+      "pointsymbol": {
+        "1": "none",
+        "2": "none",
+        "3": "none",
+        "4": "none",
+        "5": "none",
+        "6": "none",
+        "7": "none",
+        "8": "none"
+      }
+    },
+    "3": {
+      "state": {
+        "on": true,
+        "bri": 254,
+        "hue": 0,
+        "sat": 237,
+        "xy": [0.6553, 0.3257],
+        "ct": 500,
+        "alert": "none",
+        "effect": "none",
+        "colormode": "hs",
+        "reachable": true
+      },
+      "type": "Extended color light",
+      "name": "Corner Light",
+      "modelid": "LCT001",
+      "swversion": "65003148",
+      "pointsymbol": {
+        "1": "none",
+        "2": "none",
+        "3": "none",
+        "4": "none",
+        "5": "none",
+        "6": "none",
+        "7": "none",
+        "8": "none"
+      }
+    }
+  },
+  "groups": {},
+  "config": {
+    "name": "Philips hue",
+    "mac": "00:17:88:09:7d:dd",
+    "dhcp": true,
+    "ipaddress": "10.0.1.6",
+    "netmask": "255.255.255.0",
+    "gateway": "10.0.1.1",
+    "proxyaddress": "",
+    "proxyport": 0,
+    "UTC": "2012-12-01T09:09:00",
+    "whitelist": {
+      "8ba7d2bd509761702b8f1e458d45042d": {
+        "last use date": "2012-12-01T08:00:35",
+        "create date": "2012-11-29T00:54:36",
+        "name": "🗿"
+      },
+      "26b1675fb6094bf22889622cfa239662": {
+        "last use date": "2012-11-30T03:36:16",
+        "create date": "2012-11-29T01:03:16",
+        "name": "SneakyPad"
+      },
+      "7813258ef8c6b632dde8cc80f6bda62f": {
+        "last use date": "2012-12-01T09:09:00",
+        "create date": "2012-11-29T01:43:59",
+        "name": "sneakyapp"
+      }
+    },
+    "swversion": "01003542",
+    "swupdate": {
+      "updatestate": 0,
+      "url": "",
+      "text": "",
+      "notify": false
+    },
+    "linkbutton": false,
+    "portalservices": true
+  },
+  "schedules": {}
+}

@@ -5,12 +5,11 @@ This module requires MagicMirror version `2.5` or later.
 
 This module displays the status of your [Philips Hue](http://meethue.com) lights and light groups on your Magic Mirror and and supports multiple view types and modes.
 
-Please note that this module still uses v1 of the Hue API - once v2 of the Hue API has been released, I'll get the module updated.  
+Please note that this module still uses v1 of the Hue API - once v2 of the Hue API has been released, I'll get the module updated.
 
 ![image](https://user-images.githubusercontent.com/3209660/49979103-2e3cd400-ff13-11e8-8f76-bc4c7d5e7b76.png)
 
-*An example showing light groups on the left and lights on the right in the Grid view.*
-
+_An example showing light groups on the left and lights on the right in the Grid view._
 
 ## Table of Contents
 
@@ -21,22 +20,29 @@ Please note that this module still uses v1 of the Hue API - once v2 of the Hue A
 - [Configuration Options specific to the Grid view](#configuration-options-specific-to-the-grid-view)
 - [Configuration Options specific to the List view](#configuration-options-specific-to-the-list-view)
 - [How It Looks](#how-it-looks)
-  * [Grid View](#grid-view)
-  * [List View](#list-view)
+  - [Grid View](#grid-view)
+  - [List View](#list-view)
 - [FAQ](#faq)
-  * [How do I filter which lights or groups to show?](#how-do-i-filter-which-lights-or-groups-to-show)
-  * [In the grid view is there any way to show the lights or light groups horizontally across the screen?](#in-the-grid-view-is-there-any-way-to-show-the-lights-or-light-groups-horizontally-across-the-screen)
-  * [The colors don't exactly match what's shown in the Hue App](#the-colors-dont-exactly-match-whats-shown-in-the-hue-app)
-  * [How does the motionSleep setting work?](#how-does-the-motionsleep-setting-work)
+  - [How do I filter which lights or groups to show?](#how-do-i-filter-which-lights-or-groups-to-show)
+  - [In the grid view is there any way to show the lights or light groups horizontally across the screen?](#in-the-grid-view-is-there-any-way-to-show-the-lights-or-light-groups-horizontally-across-the-screen)
+  - [The colors don't exactly match what's shown in the Hue App](#the-colors-dont-exactly-match-whats-shown-in-the-hue-app)
+  - [How does the motionSleep setting work?](#how-does-the-motionsleep-setting-work)
 - [Using Handlebars](#using-handlebars)
 
-
 ## Installing the module
+
 1. Run `git clone https://github.com/michael5r/mmm-hue-lights.git` from inside your `MagicMirror/modules` folder.
 2. Enter the new `mmm-hue-lights` directory and execute `npm install`.
 
+## Local Testing
+
+1. Run `npm ci`
+2. Run `npm start`
+
+A test page should open in a browser
 
 ## Getting the Hue credentials
+
 In order for you to have access to your Hue lights, you need a [Hue developer account](https://developers.meethue.com) and a couple of things:
 
 - the `IP address` of the Hue bridge you're using
@@ -48,8 +54,8 @@ https://developers.meethue.com/develop/get-started-2/
 
 If you don't have a Hue developer account already, click the `register` link on the page above to set one up (it's free).
 
-
 ## Using the module
+
 To use this module, simply add it to the `modules` array in the MagicMirror `config/config.js` file:
 
 ```js
@@ -68,48 +74,44 @@ This module uses the excellent [Handlebars](http://handlebarsjs.com) library to 
 
 If, however, you wish to modify the HTML structure of the module, read the [Using Handlebars](#using-handlebars) guide at the bottom of this page.
 
-
 ## General Configuration Options
 
-Option               | Type      | Default    | Description
----------------------|-----------|------------|-------------------------------------------------------------
-`bridgeIp`           | `string`  | -          | **This value is required for this module to work.**
-`user`               | `string`  | -          | **This value is required for this module to work.**
-`displayType`        | `string`  | `grid`     | `grid` or `list`
-`displayMode`        | `string`  | `lights`   | `groups` or `lights`
-`displayFilter`      | `array`   | `['all']`  | [Array of strings with names of lights/groups that you wish to **show**](#how-do-i-filter-which-lights-or-groups-to-show)
-`hideFilter`         | `array`   | `[]`       | [Array of strings with names of lights/groups that you wish to **hide**](#how-do-i-filter-which-lights-or-groups-to-show)
-`hideOff`            | `boolean` | `false`    | Whether to hide lights that are off
-`orderByName`        | `boolean` | `false`    | Whether to display lights or groups alphabetically
-`updateInterval`     | `int`     | `120000`   | How often to load new data, default is 2 minutes
-`initialLoadDelay`   | `int`     | `0`        | How long to delay the initial load (in ms)
-`motionSleep`        | `boolean` | `false`    | Suspend module when triggered by [MMM-PIR-Sensor](https://github.com/paviro/MMM-PIR-Sensor)
-`motionSleepSeconds` | `int`     | `300`      | When motion is triggered, how long to wait before going to sleep. Default is 5 minutes.
-
+| Option               | Type      | Default   | Description                                                                                                               |
+| -------------------- | --------- | --------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `bridgeIp`           | `string`  | -         | **This value is required for this module to work.**                                                                       |
+| `user`               | `string`  | -         | **This value is required for this module to work.**                                                                       |
+| `displayType`        | `string`  | `grid`    | `grid` or `list`                                                                                                          |
+| `displayMode`        | `string`  | `lights`  | `groups` or `lights`                                                                                                      |
+| `displayFilter`      | `array`   | `['all']` | [Array of strings with names of lights/groups that you wish to **show**](#how-do-i-filter-which-lights-or-groups-to-show) |
+| `hideFilter`         | `array`   | `[]`      | [Array of strings with names of lights/groups that you wish to **hide**](#how-do-i-filter-which-lights-or-groups-to-show) |
+| `hideOff`            | `boolean` | `false`   | Whether to hide lights that are off                                                                                       |
+| `orderByName`        | `boolean` | `false`   | Whether to display lights or groups alphabetically                                                                        |
+| `updateInterval`     | `int`     | `120000`  | How often to load new data, default is 2 minutes                                                                          |
+| `initialLoadDelay`   | `int`     | `0`       | How long to delay the initial load (in ms)                                                                                |
+| `motionSleep`        | `boolean` | `false`   | Suspend module when triggered by [MMM-PIR-Sensor](https://github.com/paviro/MMM-PIR-Sensor)                               |
+| `motionSleepSeconds` | `int`     | `300`     | When motion is triggered, how long to wait before going to sleep. Default is 5 minutes.                                   |
 
 ## Configuration Options specific to the Grid view
 
 The following options only apply if your `displayType` has been set to `grid` - they have no effect on the list view:
 
-Option             | Type      | Default   | Description
--------------------|-----------|-----------|-------------------------------------------------------------
-`minimalGrid`      | `boolean` | `false`   | A more minimal look for the grid
-`minimalGridUltra` | `boolean` | `false`   | An ultra-minimal look for the grid
-`alignment`        | `string`  | `center`  | One of: `left`, `center`, `right`
+| Option             | Type      | Default  | Description                        |
+| ------------------ | --------- | -------- | ---------------------------------- |
+| `minimalGrid`      | `boolean` | `false`  | A more minimal look for the grid   |
+| `minimalGridUltra` | `boolean` | `false`  | An ultra-minimal look for the grid |
+| `alignment`        | `string`  | `center` | One of: `left`, `center`, `right`  |
 
 **Note:** In the grid view, `alignment` only applies to the `minimalGridUltra` mode.
-
 
 ## Configuration Options specific to the List view
 
 The following options only apply if your `displayType` has been set to `list` - they have no effect on the grid view:
 
-Option             | Type       | Default   | Description
--------------------|------------|-----------|-------------------------------------------------------------
-`minimalList`      | `boolean`  | `false`   | A more minimal look for the list
-`coloredList`      | `boolean`  | `true`    | Whether to show the colors of your lights/groups in the list
-`alignment`        | `string`   | `center`  | One of: `left`, `center`, `right`
-
+| Option        | Type      | Default  | Description                                                  |
+| ------------- | --------- | -------- | ------------------------------------------------------------ |
+| `minimalList` | `boolean` | `false`  | A more minimal look for the list                             |
+| `coloredList` | `boolean` | `true`   | Whether to show the colors of your lights/groups in the list |
+| `alignment`   | `string`  | `center` | One of: `left`, `center`, `right`                            |
 
 ## How It Looks
 
@@ -154,28 +156,29 @@ With `minimalList` set to `true` and `alignment` set to `right`.
 
 ![image](https://user-images.githubusercontent.com/3209660/49979620-752bc900-ff15-11e8-8b3a-f280ecc16948.png)
 
-
 ## FAQ
 
 ### How do I filter which lights or groups to show?
 
 You have two options:
 
-1) `displayFilter` - which filters lights/groups based on which of them you want to **show**
-2) `hideFilter` -  which filters lights/groups based on which of them you want to **hide**
+1. `displayFilter` - which filters lights/groups based on which of them you want to **show**
+2. `hideFilter` - which filters lights/groups based on which of them you want to **hide**
 
 The default for this module is for the `displayFilter` to be set to `['all']` and for the `hideFilter` to be empty which shows all your lights and light groups.
 
 Both the `displayFilter` and `hideFilter` options accept an `array` with 1 or more `strings`.
 
 If, for instance, you only wish to see lights or groups named `living room`, update `displayFilter` to:
+
 ```js
-displayFilter: ['living room']
+displayFilter: ["living room"];
 ```
 
 You can add multiple strings to the filter - like so:
+
 ```js
-displayFilter: ['living room', 'office']
+displayFilter: ["living room", "office"];
 ```
 
 This will now display all lights or groups named either `living room` or `office` (the filter is not case-sensitive, so `OFFICE` would work as well).
@@ -183,13 +186,12 @@ This will now display all lights or groups named either `living room` or `office
 The `hideFilter` works the same way, but in reverse - if you set it to:
 
 ```js
-hideFilter: ['living room']
+hideFilter: ["living room"];
 ```
 
 Any lights or light groups named `living room` will now be hidden.
 
 You can combine the two filters for ultimate flexibility in regards to which lights or light groups you wish to show.
-
 
 ### In the grid view is there any way to show the lights or light groups horizontally across the screen?
 
@@ -199,23 +201,23 @@ Something like this?
 
 Sure - do the following two things:
 
-1) Set the `position` of the module to one of the full-width horizonal positions (`top_bar`, `middle_center` or `bottom_bar`).
-2) Add the following to your `custom.css` file in MagicMirror's `css` folder:
+1. Set the `position` of the module to one of the full-width horizonal positions (`top_bar`, `middle_center` or `bottom_bar`).
+2. Add the following to your `custom.css` file in MagicMirror's `css` folder:
 
 ```css
 .mmm-hue-lights .grid {
-    width: auto;
-    display: flex;
-    flex-flow: row wrap;
-    margin: -10px;
-    max-width: none;
-    justify-content: center;
+  width: auto;
+  display: flex;
+  flex-flow: row wrap;
+  margin: -10px;
+  max-width: none;
+  justify-content: center;
 }
 
 .mmm-hue-lights .grid .hue {
-    width: calc(33.33% - 20px);
-    margin: 10px;
-    display: block;
+  width: calc(33.33% - 20px);
+  margin: 10px;
+  display: block;
 }
 ```
 
@@ -238,7 +240,6 @@ This sleep mode will last till the next positive `USER_PRESENCE` notification is
 
 This is a good option to enable if you're using a monitor that shows an ugly "no signal message" when the HDMI signal is lost and you've therefore turned off the `powerSaving` setting in the MMM-Pir-Sensor module.
 
-
 ## Using Handlebars
 
 The Handlebars templates can all be found in the `templates` folder in the root of this module.
@@ -252,6 +253,7 @@ npm install handlebars -g
 Make any changes you wish in the relevant `.hbs` files in the `templates` folder.
 
 Once you're done, precompile all templates by running this in your terminal:
+
 ```js
 handlebars <path-to-MM-modules>/mmm-hue-lights/templates/*.hbs -f <path-to-MM-modules>/mmm-hue-lights/mmm-hue-lights-templates.js -m
 ```
